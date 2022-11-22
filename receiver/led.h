@@ -1,14 +1,14 @@
 float yaw;
 int controle;
 
-#define n 16 ///
-#define ne 12 //
-#define e 25  //
-#define se 17
-#define s 14
-#define so 25
-#define o 12
-#define no 21
+#define n 17
+#define ne 12
+#define e 32
+#define se 33
+#define s 25
+#define so 13
+#define o 23
+#define no 2
 
 void acenderLed(int pin)
 {
@@ -57,7 +57,7 @@ void loopLeds()
 void converterYaw(String* packet)
 {
   yaw = packet->toFloat();
-  //loopLeds();
+  loopLeds();
 }
 
 void configureLeds()
