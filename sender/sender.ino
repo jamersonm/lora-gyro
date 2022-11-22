@@ -23,10 +23,7 @@ void loop() {
     digitalWrite(LED, HIGH);
     LoRa.beginPacket();
     LoRa.setTxPower(14,RF_PACONFIG_PASELECT_PABOOST);
-    LoRa.print("Yaw rate ");
-    LoRa.println(getYawrate());
-    LoRa.print(" ------------------ Yaw ");
-    LoRa.println(getYaw());
+    LoRa.print(getYaw());
     LoRa.endPacket();
   }
   else
