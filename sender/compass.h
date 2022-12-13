@@ -26,28 +26,26 @@ float getYaw(){return yaw;}
 
 void loopCompass()
 {
-    mpu.update();
-    if((millis() - timer) < 10) // yaw = yaw + yaw_rate*dt
-    {
-        yaw = mpu.getAngleZ();
-
-        //set interval 0 <= angle < 360
-        if(yaw >= 360)
-        {
-            divider = yaw / 360;
-            for(int i = 0; i < divider; i++)
-                yaw = yaw - 360;
-        }
-        else if(yaw < 0)
-        {
-            divider = yaw / 360;
-            yaw = yaw + 360;
-            for(int i = 0; i < divider; i++)
-                yaw = yaw + 360;
-        }
-    }
-    if((millis() - timer) > 20)
-        timer = millis();
+  mpu.fetchData();
+  unsigned long timer_new = millis();
+  float dt = (timer_new - timer)*0.001;
+  yaw += mpu.getGyroZ()*dt;
+  timer = timer_new;
+  
+  //set interval 0 <= angle < 360
+  if(yaw >= 360)
+  {
+    divider = yaw / 360;
+    for(int i = 0; i < divider; i++)
+        yaw = yaw - 360;
+  }
+  else if(yaw < 0)
+  {
+    divider = yaw / 360;
+    yaw = yaw + 360;
+    for(int i = 0; i < divider; i++)
+        yaw = yaw + 360;
+  }
 }
 
 void printCompass()

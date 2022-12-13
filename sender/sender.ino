@@ -19,7 +19,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   loopCompass();
   printCompass();
-  if((millis() - tempo) < 1000){
+  if((millis() - tempo) < 100){
     digitalWrite(LED, HIGH);
     LoRa.beginPacket();
     LoRa.setTxPower(14,RF_PACONFIG_PASELECT_PABOOST);
@@ -30,8 +30,7 @@ void loop() {
   {
     digitalWrite(LED, LOW);
   }
-  // Verifica se já passou 400 milisegundos
-  if((millis() - tempo) > 2000){
+  if((millis() - tempo) > 200){
     tempo = millis();
   }
 }
